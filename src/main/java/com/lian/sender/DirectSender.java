@@ -5,17 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * 创建发送者
- */
 @RestController
-public class P2pSender {
+public class DirectSender {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @GetMapping("/p2p")
-    public String sendMsg(String msg){
-        rabbitTemplate.convertAndSend("java2004lss","",msg);
+    @GetMapping("/directSender")
+    public String DirectSender(String msg,String key){
+        rabbitTemplate.convertAndSend("DirectExchange",key,msg);
         return "OK";
     }
 }
